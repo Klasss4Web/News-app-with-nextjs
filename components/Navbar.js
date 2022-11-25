@@ -6,7 +6,7 @@ export const Navbar = () => {
     <header>
       <nav>
         <div className="logo">
-          <Image width={40} height={40} src="/newsFeed.jpg" />
+          <Image width={40} height={40} src="/newsFeed.jpg" alt="logo" />
         </div>
         <Link href="/">
          Home

@@ -1,3 +1,5 @@
+const API_KEY = "FUI6V3X9uGfMR6h5OTT2DtlZUjV0ZYsR";
+
 export const getStaticPaths = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/users");
   const data = await response.json();
@@ -10,19 +12,21 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false
+    fallback: false,
   };
 };
 
 export const getStaticProps = async (context) => {
   const id = context.params.id;
-  const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/users/${id}`
+  );
   const data = await response.json();
 
   return {
-    props: { news: data }
-  }
-}
+    props: { news: data },
+  };
+};
 
 const DetailsPage = ({ news }) => {
   return (
