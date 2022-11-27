@@ -1,9 +1,15 @@
+import Head from "next/head";
 import Link from "next/link";
 import styles from "../../styles/Categories.module.css";
 
 const Categories = () => {
   return (
     <div>
+      <Head>
+        <title>News Updates | Categories</title>
+        <meta name="description" content="Your one stop news site" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className={styles.container}>
         <Link className={styles.card} href={`/categories/arts`}>
           <h2>Arts</h2>

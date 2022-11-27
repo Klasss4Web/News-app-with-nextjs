@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import styles from "../../styles/Categories.module.css";
 import useSWR from "swr";
 import { Loading } from "../../components/Loading";
+import Head from "next/head";
 
 const API_KEY = "FUI6V3X9uGfMR6h5OTT2DtlZUjV0ZYsR";
 
@@ -42,6 +43,11 @@ const DetailsPage = ({ stories }) => {
 
   return (
     <div>
+      <Head>
+        <title>News Updates | Category: {categories?.toUpperCase()}</title>
+        <meta name="description" content="Your one stop news site" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <h2>{categories?.toUpperCase()}</h2>
       {data?.results?.map((story, index) => (
         <div className={styles.single} key={index}>

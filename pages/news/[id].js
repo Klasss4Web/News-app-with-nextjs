@@ -1,5 +1,5 @@
+import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { Loading } from "../../components/Loading";
@@ -56,11 +56,16 @@ const DetailsPage = ({ stories }) => {
   // const pathname = new URL(urls)?.pathname;
   // console.log(data, "data", pathname, "idss", id, "name", name);
 
-  if(error) return <h2>OOOOOPS Something wen wrong</h2>
+  if(error) return <h2>OOOOOPS Something went wrong</h2>
   if(!data) return <Loading />
 
   return (
     <div>
+      <Head>
+        <title>News Updates | {storyToDisplay?.title}</title>
+        <meta name="description" content="Your one stop news site" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <h1>{storyToDisplay?.title}</h1>
       <img
         className="hero-img"

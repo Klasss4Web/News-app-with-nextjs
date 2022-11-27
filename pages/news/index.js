@@ -1,5 +1,5 @@
+import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 import styles from "../../styles/News.module.css"
 
@@ -26,6 +26,11 @@ const News = ({ news, stories }) => {
   // console.log("stories", stories)
   return (
     <div>
+      <Head>
+        <title>News Updates | All News</title>
+        <meta name="description" content="Your one stop news site" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <h2>All News</h2>
       {stories?.results?.map((story, index) => (
         <div className={styles.single} key={index}>
