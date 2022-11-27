@@ -8,15 +8,10 @@ export const Navbar = () => {
         <div className="logo">
           <Image width={40} height={40} src="/newsFeed.jpg" alt="logo" />
         </div>
-        <Link href="/">
-         Home
-        </Link>
-        <Link href="/about">
-          About Us
-        </Link>
-        <Link href="/news">
-          News Listing
-        </Link>
+        <Link href="/">Home</Link>
+        <Link href="/about">About Us</Link>
+        <Link href="/news">News Listing</Link>
+        <Link href="/categories">All Categories</Link>
       </nav>
     </header>
   );

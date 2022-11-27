@@ -1,40 +1,76 @@
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import useSWR from "swr";
+
 const API_KEY = "FUI6V3X9uGfMR6h5OTT2DtlZUjV0ZYsR";
 
-export const getStaticPaths = async () => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/users");
-  const data = await response.json();
+// export const getStaticPaths = async () => {
 
-  const paths = data?.map((feed) => {
-    return {
-      params: { id: feed.id.toString() },
-    };
-  });
+//   const topStories = await fetch(
+//     `https://api.nytimes.com/svc/topstories/v2/us.json?api-key=${API_KEY}`
+//   );
 
-  return {
-    paths,
-    fallback: false,
-  };
-};
+//   const stories = await topStories.json();
 
-export const getStaticProps = async (context) => {
-  const id = context.params.id;
-  const response = await fetch(
-    `https://jsonplaceholder.typicode.com/users/${id}`
+//   const paths = stories?.results?.map((story) => {
+//     return {
+//       params: { id: story?.title, category: story?.section },
+//     };
+//   });
+
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// };
+
+// export const getStaticProps = async (context) => {
+
+//   const id = context.params.id;
+//   const topStories = await fetch(
+//     `https://api.nytimes.com/svc/topstories/v2/us.json?api-key=${API_KEY}`
+//   );
+
+//   const stories = await topStories.json();
+
+//   return {
+//     props: { stories },
+//   };
+// };
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
+const DetailsPage = ({ stories }) => {
+  const router = useRouter();
+  const { id, name } = router.query;
+
+  const { data, error } = useSWR(
+    `https://api.nytimes.com/svc/topstories/v2/${name}.json?api-key=${API_KEY}`,
+    fetcher
   );
-  const data = await response.json();
 
-  return {
-    props: { news: data },
-  };
-};
+  const storyToDisplay = data?.results?.find((story) => story?.title === id);
+  const urls = window.location.href;
+  const pathname = new URL(urls)?.pathname;
+  // console.log(data, "data", pathname, "idss", id, "name", name);
 
-const DetailsPage = ({ news }) => {
+  if(error) return <h2>OOOOOPS Something wen wrong</h2>
+  if(!data) return <h2>Loading...</h2>
+
   return (
     <div>
-      <h1>{news?.name}</h1>
-      <p>{news?.email}</p>
-      <p>{news?.website}</p>
-      <p>{news?.address.city}</p>
+      <h1>{storyToDisplay?.title}</h1>
+      <img
+        className="hero-img"
+        width={"100%"}
+        height={300}
+        src={storyToDisplay?.multimedia?.[0]?.url}
+        alt="display"
+      />
+      <p>{storyToDisplay?.abstract}</p>
+      <p>{storyToDisplay?.byline}</p>
+      <Link href={storyToDisplay?.url}>Read full story</Link>
     </div>
   );
 };
