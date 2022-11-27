@@ -1,39 +1,45 @@
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import styles from "../../styles/Categories.module.css";
+import useSWR from "swr";
 
 const API_KEY = "FUI6V3X9uGfMR6h5OTT2DtlZUjV0ZYsR";
 
-
 const DetailsPage = ({ stories }) => {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  const [data, setData] = useState([])
-  
+  // const [data, setData] = useState([])
+
   const router = useRouter();
   const { categories } = router.query;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-         const topStories = await fetch(
-         `https://api.nytimes.com/svc/topstories/v2/${categories}.json?api-key=${API_KEY}`
-       );
+  const { data, error } = useSWR(
+    `https://api.nytimes.com/svc/topstories/v2/${categories}.json?api-key=${API_KEY}`,
+    fetcher
+  );
 
-       const stories = await topStories.json();
-       setData(stories)
-      } catch (err) {
-        console.log("Error", err.response)
-      }
-    }
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //        const topStories = await fetch(
+  //        `https://api.nytimes.com/svc/topstories/v2/${categories}.json?api-key=${API_KEY}`
+  //      );
 
-    fetchData();
-  },[])
+  //      const stories = await topStories.json();
+  //      setData(stories)
+  //     } catch (err) {
+  //       console.log("Error", err.response)
+  //     }
+  //   }
 
-  const storyToDisplay = stories?.results?.find((story) => story?.title === id);
+  //   fetchData();
+  // },[])
+
+  // const storyToDisplay = stories?.results?.find((story) => story?.title === id);
 
   // console.log("categories, data", data);
+  if (error) return <h2>OOOOOPS Something wen wrong</h2>;
+  if (!data) return <h2>Loading...</h2>;
 
   return (
     <div>

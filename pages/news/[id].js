@@ -51,8 +51,8 @@ const DetailsPage = ({ stories }) => {
   );
 
   const storyToDisplay = data?.results?.find((story) => story?.title === id);
-  const urls = window.location.href;
-  const pathname = new URL(urls)?.pathname;
+  // const urls = window.location.href;
+  // const pathname = new URL(urls)?.pathname;
   // console.log(data, "data", pathname, "idss", id, "name", name);
 
   if(error) return <h2>OOOOOPS Something wen wrong</h2>
