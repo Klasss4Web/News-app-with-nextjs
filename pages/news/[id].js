@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import { Loading } from "../../components/Loading";
 
 const API_KEY = "FUI6V3X9uGfMR6h5OTT2DtlZUjV0ZYsR";
 
@@ -56,7 +57,7 @@ const DetailsPage = ({ stories }) => {
   // console.log(data, "data", pathname, "idss", id, "name", name);
 
   if(error) return <h2>OOOOOPS Something wen wrong</h2>
-  if(!data) return <h2>Loading...</h2>
+  if(!data) return <Loading />
 
   return (
     <div>

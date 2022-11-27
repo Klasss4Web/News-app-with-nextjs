@@ -23,7 +23,7 @@ export const getStaticProps = async () => {
 
 const News = ({ news, stories }) => {
 
-  console.log("stories", stories)
+  // console.log("stories", stories)
   return (
     <div>
       <h2>All News</h2>

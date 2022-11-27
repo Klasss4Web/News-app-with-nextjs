@@ -2,13 +2,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "../../styles/Categories.module.css";
 import useSWR from "swr";
+import { Loading } from "../../components/Loading";
 
 const API_KEY = "FUI6V3X9uGfMR6h5OTT2DtlZUjV0ZYsR";
 
 const DetailsPage = ({ stories }) => {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
-  // const [data, setData] = useState([])
 
   const router = useRouter();
   const { categories } = router.query;
@@ -39,7 +38,7 @@ const DetailsPage = ({ stories }) => {
 
   // console.log("categories, data", data);
   if (error) return <h2>OOOOOPS Something wen wrong</h2>;
-  if (!data) return <h2>Loading...</h2>;
+  if (!data) return <Loading />;
 
   return (
     <div>
