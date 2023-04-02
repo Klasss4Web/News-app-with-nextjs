@@ -6,12 +6,12 @@ export const Navbar = () => {
     <header>
       <nav>
         <div className="logo">
-          <Image width={40} height={40} src="/newsFeed.jpg" alt="logo" />
+          <Image width={40} height={40} src="/newsFeed.png" alt="logo" />
         </div>
         <Link href="/">Home</Link>
         <Link href="/about">About Us</Link>
-        <Link href="/news">News Listing</Link>
         <Link href="/categories">All Categories</Link>
+        <Link href="/news">News Listing</Link>
       </nav>
     </header>
   );
