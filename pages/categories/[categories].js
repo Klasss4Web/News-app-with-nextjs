@@ -20,25 +20,6 @@ const DetailsPage = ({ stories }) => {
     fetcher
   );
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //        const topStories = await fetch(
-  //        `https://api.nytimes.com/svc/topstories/v2/${categories}.json?api-key=${API_KEY}`
-  //      );
-
-  //      const stories = await topStories.json();
-  //      setData(stories)
-  //     } catch (err) {
-  //       console.log("Error", err.response)
-  //     }
-  //   }
-
-  //   fetchData();
-  // },[])
-
-  // const storyToDisplay = stories?.results?.find((story) => story?.title === id);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       window.scrollTo(120, 120);
